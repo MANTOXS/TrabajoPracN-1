@@ -22,14 +22,30 @@ esPrimo x = [n | n <- [1..x], mod x n == 0] == [1,x]
 divisoresPrimos :: Int -> [Int]
 divisoresPrimos x = [n | n <- [1..x], mod x n == 0, esPrimo n]
 
+calAux :: Int -> [Int] -> Int -> [(Int,Int)]
+calAux x [] n = [(x,n)]
+calAux x (xs) n 
+       | x ==(head xs) = calAux x (tail xs) (n+1)
+       | otherwise = (x,n) : calAux (head xs) xs 0 
+
 
 -- | Dada una lista de números, comprime la lista contando las repeticiones adyacentes.
 -- Ej: comprimir [2,2,2,5,2,2] = [(2,3), (5,1), (2,2)]
 comprimir :: [Int] -> [(Int, Int)]
-comprimir xs = 
+comprimir [] = []
+comprimir (x:xs) = calAux x xs 1
 
--- | Función principal. 
--- Implementar usando las funciones previas, funciones definidas en Haskell y toda otra función auxiliar que sea necesaria.
+-- | Dado un número X, retorna la lista de su factorización prima, es decir, una lista de pares
+-- donde el primer elemento es el factor primo y el segundo es la cantidad de veces que aparece en la factorización.
 -- Ej: factorizar 118800 = [(2,4),(3,3),(5,2),(11,1)]
-factorizarr :: Int -> [(Int,Int)]
-factorizar = undefined
+factorizar :: Int -> [(Int,Int)]
+factorizar 1 = []  
+factorizar x = comprimir (factorizaAux x (divisoresPrimos x))
+
+-- | Auxiliar que descompone el número en una lista con los factores primos.
+factorizaAux :: Int -> [Int] -> [Int]
+factorizaAux 1 _ = []
+factorizaAux x [] = []
+factorizaAux x (y:ys)
+  | mod x y == 0 = y : factorizaAux (div x y) (y:ys)
+  | otherwise = factorizaAux x ys
