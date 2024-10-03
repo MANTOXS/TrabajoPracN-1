@@ -22,14 +22,20 @@ esPrimo x = [n | n <- [1..x], mod x n == 0] == [1,x]
 divisoresPrimos :: Int -> [Int]
 divisoresPrimos x = [n | n <- [1..x], mod x n == 0, esPrimo n]
 
+calAux :: Int -> [Int] -> Int -> [(Int,Int)]
+calAux x [] n = [(x,n)]
+calAux x (xs) n 
+       | x ==(head xs) = calAux x (tail xs) (n+1)
+       | otherwise = (x,n) : calAux (head xs) xs 0 
+
 
 -- | Dada una lista de números, comprime la lista contando las repeticiones adyacentes.
 -- Ej: comprimir [2,2,2,5,2,2] = [(2,3), (5,1), (2,2)]
 comprimir :: [Int] -> [(Int, Int)]
-comprimir xs = 
+comprimir xs = undefined
 
 -- | Función principal. 
 -- Implementar usando las funciones previas, funciones definidas en Haskell y toda otra función auxiliar que sea necesaria.
 -- Ej: factorizar 118800 = [(2,4),(3,3),(5,2),(11,1)]
-factorizarr :: Int -> [(Int,Int)]
+factorizar :: Int -> [(Int,Int)]
 factorizar = undefined
