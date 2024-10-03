@@ -35,14 +35,6 @@ comprimir :: [Int] -> [(Int, Int)]
 comprimir [] = []
 comprimir (x:xs) = calAux x xs 1
 
-
--- | Dado un número X, retorna la lista de su factorización prima, es decir, una lista de pares
--- donde el primer elemento es el factor primo y el segundo es la cantidad de veces que aparece en la factorización.
--- Ej: factorizar 118800 = [(2,4),(3,3),(5,2),(11,1)]
-factorizar :: Int -> [(Int,Int)]
-factorizar 1 = []  
-factorizar x = comprimir (factorizaAux x (divisoresPrimos x))
-
 -- | Auxiliar que descompone el número en una lista con los factores primos.
 factorizaAux :: Int -> [Int] -> [Int]
 factorizaAux 1 _ = []
@@ -50,3 +42,11 @@ factorizaAux x [] = []
 factorizaAux x (y:ys)
   | mod x y == 0 = y : factorizaAux (div x y) (y:ys)
   | otherwise = factorizaAux x ys
+
+-- | Dado un número X, retorna la lista de su factorización prima, es decir, una lista de pares
+-- donde el primer elemento es el factor primo y el segundo es la cantidad de veces que aparece en la factorización.
+-- Ej: factorizar 118800 = [(2,4),(3,3),(5,2),(11,1)]
+factorizar :: Int -> [(Int,Int)] 
+factorizar 1 = []  
+factorizar x = comprimir (factorizaAux x (divisoresPrimos x))
+
