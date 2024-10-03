@@ -32,13 +32,18 @@ calAux x (xs) n
 -- | Dada una lista de números, comprime la lista contando las repeticiones adyacentes.
 -- Ej: comprimir [2,2,2,5,2,2] = [(2,3), (5,1), (2,2)]
 comprimir :: [Int] -> [(Int, Int)]
+<<<<<<< HEAD
 comprimir [] = []
 comprimir (x:xs) = calAux x xs 1
+=======
+comprimir xs = undefined
+>>>>>>> d0c47d8e06b620ad28066ac07fe791203a33fbe4
 
 -- | Dado un número X, retorna la lista de su factorización prima, es decir, una lista de pares
 -- donde el primer elemento es el factor primo y el segundo es la cantidad de veces que aparece en la factorización.
 -- Ej: factorizar 118800 = [(2,4),(3,3),(5,2),(11,1)]
 factorizar :: Int -> [(Int,Int)]
+<<<<<<< HEAD
 factorizar 1 = []  
 factorizar x = comprimir (factorizaAux x (divisoresPrimos x))
 
@@ -49,3 +54,6 @@ factorizaAux x [] = []
 factorizaAux x (y:ys)
   | mod x y == 0 = y : factorizaAux (div x y) (y:ys)
   | otherwise = factorizaAux x ys
+=======
+factorizar = undefined
+>>>>>>> d0c47d8e06b620ad28066ac07fe791203a33fbe4
